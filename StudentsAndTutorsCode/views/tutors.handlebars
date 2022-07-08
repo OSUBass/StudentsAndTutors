@@ -1,0 +1,105 @@
+<!-- Rachelle Bass -->
+<!-- Donovan Howe -->
+<!-- CS 340, Introduction to Databases, web code -->
+<!-- Project Title: studentsandtutors.edu -->
+<!-- Project Group 29 -->
+
+<!-- This .handlebars file contains html for the tutors page -->
+<!-- See http://flip3.engr.oregonstate.edu:17771/codeReferences for a full list of references -->
+
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+  		<meta charset="UTF-8">
+  		<title>studentsandtutors.edu</title>
+  		<link rel="stylesheet" href="../css/style.css" type="text/css">
+ 	</head>
+
+		<header>
+			<img class="logo" src="../images/studentsandtutors.png" width=500 height=100>
+
+			<div id="navigationBar" class="navigationBar">
+				<a class="navigationItem" href="../">Home</a>
+				<a class="navigationItem" href="../students">Students</a>
+				<a class="navigationItem active" href="../tutors">Tutors</a>
+				<a class="navigationItem" href="../subjects">Subjects</a>
+				<a class="navigationItem" href="../appointments">Appointments</a>
+			</div>
+		</header>
+
+		<form id="addTutor" action="/tutors" method="post">
+  			<fieldset>
+    			<legend>New Tutors</legend>
+
+    			<label>First Name:
+    	      		<input type="text" name="tutorFirstName" id="tutorFirstName" required="required" size="25" maxlength="25" placeholder="Enter your first name..." required>
+    			</label>
+    			<label>Last Name:
+    	      		<input type="text" name="tutorLastName" id="tutorLastName" required="required" size="25" maxlength="25" placeholder="Enter your last name..." required>
+    			</label>
+    			<br>
+
+    			<br>
+
+    			<label>Subjects (select at least one):<br>
+                    {{#each subjects}}
+                    <input type="checkbox" name="subjectCheckbox" class="subjectCheckbox" required="required" value="{{subjectId}}">
+                        <label for="checkboxSubject_1">{{subjectName}}</label><br>
+                    {{/each}}
+                </label>
+
+    	  	 	<input type="submit" id="tutorsSubmit" value="Submit"/>
+    	  	</fieldset>
+    	</form>
+
+    	<p class="guide">
+    		Use <span class="exampleUpdate">✎</span> to update, or use <span class="exampleDelete">⮽</span> to delete an entry.<br>
+            Use <span class="exampleConfirm">🗹</span> to confirm your update, or <span class="exampleUndo">⎌</span> to cancel your update.<br>
+    		<span class="warning">⚠ Warning! Deleting a tutor will delete all related appointments.</span>
+    	</p>
+
+		<table>
+			<tr>
+				<th>tutorId</th>
+				<th>tutorFullName</th>
+				<th>subjects</th>
+				<th></th>
+				<th></th>
+			</tr>
+
+			{{#tutors}}
+                <form action="/tutors/update" method="post">
+		  		<tr class="matchTable">
+                    <td>{{tutorId}}</td>
+                    
+                    <input type="text" name="updateTutorId" value="{{tutorId}}" class="displayNone"></input>
+                    
+                    <td>{{tutorFullName}}</td>
+
+                    <td class="subjectsCondensed">{{subjects}}</td>
+
+		  		   	<td class="subjectsAllCheckboxes displayNone">
+		  		   		{{#each ../subjects}}
+    	      				<input type="checkbox" name="subjectCheckbox" class="subjectCheckbox" required="required" value="{{subjectId}}">
+    	      				{{subjectName}} ({{subjectId}})
+    	      				</input><br>
+						{{/each}}   
+					</td>
+                   <td class="confirm displayNone"><input type="submit" value="🗹"></input></td>
+                   <td class="undo displayNone"><span onClick="undoUpdate()">⎌</span></td>
+		  		   <td class="update"><span onClick="enableUpdate()">✎</span></td>
+		  		   <td class="del"><span onClick="deleteTutor({{tutorId}})">⮽</span></td>
+
+		  		</tr>
+                </form>
+		  	{{/tutors}}
+		</table>
+
+		<!-- Scripts -->
+
+		<script src="./formsAndButtons.js"></script>
+		<script src="./formValidation.js"></script>
+
+</html>

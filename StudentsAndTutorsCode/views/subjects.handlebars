@@ -1,0 +1,98 @@
+<!-- Rachelle Bass -->
+<!-- Donovan Howe -->
+<!-- CS 340, Introduction to Databases, web code -->
+<!-- Project Title: studentsandtutors.edu -->
+<!-- Project Group 29 -->
+
+<!-- This .handlebars file contains html for the subjects page -->
+<!-- See http://flip3.engr.oregonstate.edu:17771/codeReferences for a full list of references -->
+
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+  		<meta charset="UTF-8">
+  		<title>studentsandtutors.edu</title>
+  		<link rel="stylesheet" href="../css/style.css" type="text/css">
+ 	</head>
+
+		<header>
+			<img class="logo" src="../images/studentsandtutors.png" width=500 height=100>
+
+			<div id="navigationBar" class="navigationBar">
+				<a class="navigationItem" href="../">Home</a>
+				<a class="navigationItem" href="../students">Students</a>
+				<a class="navigationItem" href="../tutors">Tutors</a>
+				<a class="navigationItem active" href="../subjects">Subjects</a>
+				<a class="navigationItem" href="../appointments">Appointments</a>
+			</div>
+		</header>
+
+		<form id="addSubject" action="/subjects" method="post">
+  			<fieldset>
+    			<legend>Add a New Subject to Our Directory!</legend>
+
+    			<label>Subject:
+    	      		<input type="text" id="subjectName" name="subjectName" required="required" size="25" maxlength="25" placeholder="Enter subject..." pattern="[a-zA-Z0-9 ]+">
+    			</label>
+
+    	  	 	<input type="submit" id="subjectSubmit" value="Submit"/>
+
+    	  	 	<span class="hint">(Letters and numbers only)</span>
+    	  	</fieldset>
+    	</form>
+
+		<form id="searchSubject" action="/subjects/search" method="post" >
+  			<fieldset>
+    			<legend>Want to see if we offer a subject? Search our database!</legend>
+
+    			<label>Subject:
+    	      		<input type="text" name="subjectSearchName" required="required" size="25" maxlength="25" placeholder="Enter subject...">
+    			</label>
+
+    	  	 	<input type="submit" id="subjectSearchSubmit" value="Submit"/>
+
+    	  	 	<!-- Table for search results -->
+    	  	 	<table class="searchResults">
+					<tr>
+						<th>subjectId</th>
+						<th>subjectName</th>
+					</tr>
+					{{#each searchResults}}
+					<tr>
+						<td>{{subjectId}}</td>
+						<td>{{subjectName}}</td>
+					</tr>
+					{{/each}}
+				</table>
+
+    	  	</fieldset>
+    	</form>
+
+    	<p class="guide">
+    		Use the <span class="delete">⮽</span> button to delete an entry.<br>
+    		<span class="warning">⚠ Warning! Deleting a subject will delete all related appointments and refresh the page.</span>
+    	</p>    	
+
+		<table>
+			<tr>
+				<th>subjectId</th>
+				<th>subjectName</th>
+				<th></th>
+			</tr>
+			{{#each subjects}}
+			<tr>
+				<td>{{subjectId}}</td>
+				<td>{{subjectName}}</td>
+				<td><span class="delete" onClick="deleteSubject({{subjectId}})">⮽</span></td>
+			</tr>
+			{{/each}}
+		</table>
+
+		<!-- Scripts -->
+
+		<script src="../formsAndButtons.js"></script>
+		<script src="../formValidation.js"></script>
+
+</html>

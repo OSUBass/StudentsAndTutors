@@ -1,0 +1,65 @@
+<!-- Rachelle Bass -->
+<!-- Donovan Howe -->
+<!-- CS 340, Introduction to Databases, web code -->
+<!-- Project Title: studentsandtutors.edu -->
+<!-- Project Group 29 -->
+
+<!-- This .handlebars file contains html for the home page -->
+<!-- See http://flip3.engr.oregonstate.edu:17771/codeReferences for a full list of references -->
+
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+  		<meta charset="UTF-8">
+  		<title>studentsandtutors.edu</title>
+  		<link rel="stylesheet" href="../css/style.css" type="text/css">
+ 	</head>
+
+		<header>
+			<img class="logo" src="../images/studentsandtutors.png" width=500 height=100>
+
+			<div class="navigationBar">
+				<a class="navigationItem active" href="../">Home</a>
+				<a class="navigationItem" href="../students">Students</a>
+				<a class="navigationItem" href="../tutors">Tutors</a>
+				<a class="navigationItem" href="../subjects">Subjects</a>
+				<a class="navigationItem" href="../appointments">Appointments</a>
+			</div>
+		</header>
+
+		<p class="textBlock"> Welcome to studentsandtutors.edu!<br><br>
+
+		The purpose of our website is to facilitate the introduction of struggling students to qualified tutors who can assist them in their subject of choice.  It also enables scheduling of these tutoring sessions through a quick and easy user interface. This website ensures students can succeed in their courses while allowing tutors to find employment with opportunities that meet their skills in the Dallas area.</p> 
+
+		<p class="textBlock"> 
+			Visit the <span class="bold"> Students </span> page to see a list of students, or register as a student.<br><br>
+			See the <span class="bold"> Tutors </span> page to find a list of tutors, or register as a tutor.<br><br>
+			On the <span class="bold"> Subjects </span> page you can find a list of subjects we offer, and request new subjects.<br><br>
+			Visit the <span class="bold"> Appointments </span> page to see and schedule appointments.
+		</p>
+
+		<p class="textBlock">
+    		On each page, use the <span class="update">✎</span> button to update, or use the <span class="delete">⮽</span> button to delete 		an entry.
+    	</p>
+
+    	<p class="textBlock">
+    		Our database contains:<br>
+    		<span class="bold">{{countStudents}}</span> Students | 
+    		<span class="bold">{{countTutors}}</span> Tutors | 
+    		<span class="bold">{{countSubjects}}</span> Subjects | 
+    		<span class="bold">{{countAppointments}}</span> Appointments
+    	</p>
+
+    	<p class="textBlock">
+    		<span class="warning">Admin use only!</span>
+    		<button onClick="resetDatabase()">Reset database to sample data</button>
+    		<span class="hint">(but go ahead and push it if you want)
+    	</p>
+
+    	<!-- Scripts -->
+
+		<script src="./formsAndButtons.js"></script>
+		<script src="./formValidation.js"></script>	
+</html>	
